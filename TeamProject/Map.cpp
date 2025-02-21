@@ -58,6 +58,10 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
                     // •Ç
                     DrawGraph(x, y, imgWall, TRUE);
                 }
+                else if (mapData[j][i] == 2) {
+                    //ƒhƒA
+                    DrawGraph(x, y, imgWall, TRUE);
+                }
             }
         }
     }
