@@ -17,7 +17,7 @@ void Enemy_Update() {
 
 //ï`âÊ
 void Enemy_Draw() {
-	DrawGraph(0, m_y, m_image, TRUE);
+	DrawExtendGraph(0, m_y, 40, m_y+40, m_image, TRUE);
 }
 
 //èIóπ
