@@ -1,4 +1,4 @@
-#include<Dxlib.h>
+/*#include<Dxlib.h>
 
 static const int windowWidth = 640;  // ウィンドウのサイズ(DxLibのデフォルトサイズと同じ)
 static const int windowHeight = 480;
@@ -18,4 +18,4 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     }
     DxLib_End();
     return 0;
-}
+}*/
