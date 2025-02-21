@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
