@@ -13,7 +13,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 
     int a = 0;
     while (a == 0) {
-        DrawFormatString(10, 25, GetColor(255, 255, 255), "HelloWorld!");
+        DrawFormatString(10, 25, GetColor(255, 255, 255), "HelloWorld!!");
         if (CheckHitKey(KEY_INPUT_A))    a++;
     }
     DxLib_End();
