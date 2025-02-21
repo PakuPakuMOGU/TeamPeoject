@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="enemy.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
