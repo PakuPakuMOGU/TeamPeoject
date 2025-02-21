@@ -22,5 +22,5 @@ void Enemy_Draw() {
 
 //èIóπ
 void Enemy_Finalize() {
-	DeletGraph(m_image);
+	DeleteGraph(m_image);
 }

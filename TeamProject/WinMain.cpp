@@ -1,4 +1,5 @@
 #include<Dxlib.h>
+#include "enemy.h"
 
 static const int windowWidth = 640;  // ウィンドウのサイズ(DxLibのデフォルトサイズと同じ)
 static const int windowHeight = 480;
@@ -11,11 +12,16 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     ChangeWindowMode(TRUE);
     if (DxLib_Init() == -1) return -1;
 
-    int a = 0;
-    while (a == 0) {
-        DrawFormatString(10, 25, GetColor(255, 255, 255), "HelloWorld!!");
-        if (CheckHitKey(KEY_INPUT_A))    a++;
+    Enemy_Initialize();
+
+    while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0) 
+    {
+        Enemy_Update();
+        Enemy_Draw();
     }
-    DxLib_End();
-    return 0;
+
+        Enemy_Finalize();
+
+        DxLib_End();
+        return 0;
 }
