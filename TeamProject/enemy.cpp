@@ -3,7 +3,7 @@
 
 
 slime::slime(int x, int y) :m_x(x), m_y(y){
-	m_image = LoadGraph("../aseets/参考スライム.png"); // 画像読み込み
+	m_image = LoadGraph("../assets/Enemy3.png"); // 画像読み込み
 }
 
 //メモリ開放のだったが動かない
@@ -19,7 +19,7 @@ void slime::Enemy_Update() {
 
 //描画
 void slime::Enemy_Draw() {
-	DrawExtendGraph(m_x, m_y, m_x+40, m_y+40, m_image, TRUE);
+	DrawExtendGraph(m_x, m_y, m_x+60, m_y+60, m_image, TRUE);
 }
 
 //座標を設定
