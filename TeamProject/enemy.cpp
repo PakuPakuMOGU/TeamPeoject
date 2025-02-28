@@ -46,7 +46,6 @@ void slime::Enemy_Update() {
 //•`‰æ
 void slime::Enemy_Draw() {
 	DrawExtendGraph(m_x, m_y, m_x+40, m_y+40, m_image, TRUE);
-	//DrawExtendGraph(m_x, m_y, m_x+40, m_y+40, m_image, TRUE);
 }
 
 //À•W‚ğİ’è

@@ -2,15 +2,6 @@
 
 #define ENEMY_H
 
-/*void Enemy_Initialize();
-
-void Enemy_Update();
-
-void Enemy_Draw();
-
-void Enemy_Finalize();
-*/
-
 class slime {
 public:
 	slime(int x,int y);
