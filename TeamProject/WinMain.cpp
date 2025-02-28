@@ -1,4 +1,5 @@
 #include<Dxlib.h>
+#include<vector>
 #include "enemy.h"
 
 static const int windowWidth = 640;  // ウィンドウのサイズ(DxLibのデフォルトサイズと同じ)
@@ -12,7 +13,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     ChangeWindowMode(TRUE);
     if (DxLib_Init() == -1) return -1;
 
-    Enemy_Initialize();
+    /*Enemy_Initialize();
 
     while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0) 
     {
@@ -20,7 +21,17 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
         Enemy_Draw();
     }
 
-        Enemy_Finalize();
+        Enemy_Finalize();*/
+
+    slime slime(0, 0);  // 初期位置を指定してスライムのインスタンスを作成
+
+    while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
+    {
+            slime.Enemy_Update();
+            slime.Enemy_Draw();
+    }
+
+    slime.Enemy_Finalize();
 
         DxLib_End();
         return 0;
