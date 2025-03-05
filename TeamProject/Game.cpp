@@ -23,7 +23,7 @@ static int imgPlayer;
 
 int Init()
 {
-    imgPlayer = LoadGraph("../assets/Player.png");      // プレイヤーの画像.
+    imgPlayer = LoadGraph("../assets/参考スライム.png");      // プレイヤーの画像.
     if (imgPlayer == -1) return false;
 }
 
