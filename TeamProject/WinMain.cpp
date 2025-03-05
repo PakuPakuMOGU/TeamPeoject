@@ -5,6 +5,7 @@ static const int windowWidth = 640;  // ウィンドウのサイズ(DxLibのデフォルトサイ
 static const int windowHeight = 480;
 static const int colorDepth = 32;    // 32bit カラーを使用する
 const int NUM_SLIMES = 2;  // 配置するスライムの数
+const int ENEMY = 1;
 
 int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
@@ -18,6 +19,10 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
         slime(50, 50)
     };
 
+    goes goesArray[ENEMY] = {
+        goes(30,30)
+    };
+
     while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
     {
         for (int i = 0; i < NUM_SLIMES; i++)
@@ -25,12 +30,22 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
             slimeArray[i].Enemy_Update();
             slimeArray[i].Enemy_Draw();
         }
+        for (int i = 0; i < ENEMY; i++)
+        {
+            goesArray[i].Goes_Update();
+            goesArray[i].Goes_Draw();
+        }
     }
 
     for (int i = 0; i < NUM_SLIMES; i++)
     {
         slimeArray[i].Enemy_Finalize();
     }
+    for (int i = 0; i < ENEMY; i++)
+    {
+        goesArray[i].Goes_Finalize();
+    }
+    
         DxLib_End();
         return 0;
 }

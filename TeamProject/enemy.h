@@ -18,5 +18,22 @@ private:
 	int m_y, m_x;
 };
 
+class goes {
+public:
+	goes(int x, int y);//初期化
+
+	void Goes_Update();//移動
+	void Goes_Draw();//描画
+
+	void GoesSetPosition(int x, int y);//ポジション設定
+	void Goes_Finalize();//データ開放
+
+	//動かしたくないもの
+private:
+	int g_image;
+	int m_y, m_x;
+};
+
+
 #endif
 
