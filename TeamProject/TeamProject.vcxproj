@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+
+    <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="WinMain.cpp" />
@@ -26,6 +29,8 @@
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="System.h" />
+    <ClInclude Include="enemy.h" />
+
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
