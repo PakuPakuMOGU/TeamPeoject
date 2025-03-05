@@ -1,27 +1,29 @@
 #include<Dxlib.h>
-#include "enemy.h"
+#include <Windows.h>
 
-static const int windowWidth = 640;  // ƒEƒBƒ“ƒhƒE‚ÌƒTƒCƒY(DxLib‚ÌƒfƒtƒHƒ‹ƒgƒTƒCƒY‚Æ“¯‚¶)
-static const int windowHeight = 480;
-static const int colorDepth = 32;    // 32bit ƒJƒ‰[‚ğg—p‚·‚é
-const int NUM_SLIMES = 2;  // ”z’u‚·‚éƒXƒ‰ƒCƒ€‚Ì”
+#include "enemy.h"
+#include "System.h"
+#include "Game.h"
+
+const int NUM_SLIMES = 2;  // ï¿½zï¿½uï¿½ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Ìï¿½
 const int ENEMY = 1;
 
-int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
-    _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
-{
-    SetGraphMode(windowWidth, windowHeight, colorDepth);
-    ChangeWindowMode(TRUE);
-    if (DxLib_Init() == -1) return -1;
-
     slime slimeArray[NUM_SLIMES] = {
-        slime(0, 0),  // ‰ŠúˆÊ’u‚ğw’è‚µ‚ÄƒXƒ‰ƒCƒ€‚ğì¬
+        slime(0, 0),  // ï¿½ï¿½ï¿½ï¿½ï¿½Ê’uï¿½ï¿½ï¿½wï¿½è‚µï¿½ÄƒXï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ì¬
         slime(50, 50)
     };
 
     goes goesArray[ENEMY] = {
         goes(30,30)
     };
+
+
+int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
+    _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
+{  
+    ChangeWindowMode(TRUE);
+    SetGraphMode(GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT, 32);
+    if (DxLib_Init() == -1) return false;
 
     while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
     {
@@ -46,6 +48,10 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
         goesArray[i].Goes_Finalize();
     }
     
-        DxLib_End();
-        return 0;
+
+    Game_Main();
+    
+    DxLib_End();
+    return 0;
+
 }
