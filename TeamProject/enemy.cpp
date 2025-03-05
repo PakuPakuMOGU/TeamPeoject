@@ -6,21 +6,15 @@
 slime::slime(int x, int y) :m_x(x), m_y(y){
 	m_image = LoadGraph("../assets/Enemy40.png"); // ‰æ‘œ“Ç‚İ‚İ
 }
-
-//ƒƒ‚ƒŠŠJ•ú‚Ì‚¾‚Á‚½‚ª“®‚©‚È‚¢
-/*slime::~slime() {
-	DeleteGraph(m_image);
-}*/
-
 //“®‚«‚ÌŒvZ
 void slime::Enemy_Update() {
-	m_y++;
+	//m_y++;
 	m_x++;
 }
 
 //•`‰æ
 void slime::Enemy_Draw() {
-	DrawGraph(m_x, m_y, m_image, TRUE);
+	DrawGraph(m_x+40, m_y+40, m_image, TRUE);
 }
 
 //À•W‚ğİ’è
