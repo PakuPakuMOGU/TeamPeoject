@@ -1,20 +1,14 @@
 #include<Dxlib.h>
-#include "enemy.h"
+#include <Windows.h>
 
-static const int windowWidth = 640;  // ウィンドウのサイズ(DxLibのデフォルトサイズと同じ)
-static const int windowHeight = 480;
-static const int colorDepth = 32;    // 32bit カラーを使用する
-const int NUM_SLIMES = 2;  // 配置するスライムの数
+#include "enemy.h"
+#include "System.h"
+#include "Game.h"
+
+const int NUM_SLIMES = 2;  // ・ｽz・ｽu・ｽ・ｽ・ｽ・ｽX・ｽ・ｽ・ｽC・ｽ・ｽ・ｽﾌ撰ｿｽ
 const int ENEMY = 1;
 int maxX = 100;
 int minX = 0;
-
-int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
-    _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
-{
-    SetGraphMode(windowWidth, windowHeight, colorDepth);
-    ChangeWindowMode(TRUE);
-    if (DxLib_Init() == -1) return -1;
 
     slime slimeArray[NUM_SLIMES] = {
         slime(0, 0,minX,maxX),  // 初期位置を指定してスライムを作成
@@ -24,6 +18,14 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     goes goesArray[ENEMY] = {
         goes(30,30)
     };
+
+
+int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
+    _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
+{  
+    ChangeWindowMode(TRUE);
+    SetGraphMode(GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT, 32);
+    if (DxLib_Init() == -1) return false;
 
     while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
     {
@@ -48,6 +50,10 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
         goesArray[i].Goes_Finalize();
     }
     
-        DxLib_End();
-        return 0;
+
+    Game_Main();
+    
+    DxLib_End();
+    return 0;
+
 }
