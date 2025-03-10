@@ -1,11 +1,10 @@
 #include "DxLib.h"
 #include "Map.h"
-
+#include "Menu.h"
 int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
-    unsigned int Cr;
-    unsigned int Cr2;
+   
    
     ChangeWindowMode(TRUE); // ウィンドウモードに変更
     SetGraphMode(500, 400, 32); // 解像度とカラー設定
@@ -31,13 +30,13 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
         if (CheckHitKey(KEY_INPUT_ESCAPE)) { // ESCキーが押された場合
             break; // ループを抜けて終了処理へ
         }
-
         map.DrawMap();  // マップを描画
-        Cr = GetColor(255, 255, 255);
-        Cr2 = GetColor(200, 200, 255);
-      DrawBoxAA(400.0f, 0.0f, 500.0f, 480.0f, Cr, TRUE);
-        DrawBoxAA(0.0f, 0.0f, 100.0f, 480.0f, Cr, TRUE);
+
+        // Menu.cpp の DrawMenuBoxes 関数を呼び出す
+        DrawMenuBoxes();  // ここでボックスを描画
+
         ScreenFlip();  // バックバッファを画面に反映
+       
        
     }
 
