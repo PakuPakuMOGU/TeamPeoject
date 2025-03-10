@@ -4,30 +4,31 @@
 #define CHARASPEED 0.002;
 
 struct Player {
-    float x;    // �摜�����X���W.
-    float y;    // �摜�����Y���W.
+    float x;    // プレイヤーの座標.
+    float y;    // プレイヤーの座標.
     int size;
 
-    bool directionLeft; // �摜�̌����w��.
-    float speedX;       // X�������̑��x.
-    float speedY;       // Y�������̑��x.
+    bool directionLeft; // プレイヤーの向き.
+    float speedX;       // プレイヤーのx軸移動.
+    float speedY;       // プレイヤーのy軸移動.
 };
+
+Player player;
 
 typedef enum Task_GameState
 {
-    Task_GameState_InGame,				// �Q�[����.
-    Task_GameState_EndGame,				// �Q�[���I��.
+    Task_GameState_InGame,				// ゲーム開始.
+    Task_GameState_EndGame,				// ゲーム終了.
 }Task_GameState;
 
 static int imgPlayer;
 
+/* プレイヤーの画像読み込み */
 int Init()
 {
-    imgPlayer = LoadGraph("../assets/Player.png");      // �v���C���[�̉摜.
+    imgPlayer = LoadGraph("../assets/Player.png");      
     if (imgPlayer == -1) return false;
 }
-
-Player player;
 
 int ReX(void)
 {
@@ -43,15 +44,15 @@ bool Game_Main(void)
     player.x = 0.0f;
     player.y = 0.0f;
     player.size = 40 * 0.7;
-    player.speedX = 0; // �������x.
-    player.speedY = 0; // �������x.
+    player.speedX = 0;
+    player.speedY = 0;
 
     Init();
     
     while (1) {
-        if (CheckHitKey(KEY_INPUT_ESCAPE)) break;   // ESCAPE�ŏI��.
+        if (CheckHitKey(KEY_INPUT_ESCAPE)) break;   // ESCAPEで終了.
 
-        /* --- �L�[�{�[�h���� --- */
+        /* --- キーボード操作 --- */
         player.speedX *= CHARASPEED;
         if(CheckHitKey(KEY_INPUT_A))      player.speedX  = -CHARASPEED;
         if(CheckHitKey(KEY_INPUT_D))      player.speedX  =  CHARASPEED;                       
@@ -64,7 +65,7 @@ bool Game_Main(void)
         player.y += player.speedY;
 
 
-        // �}�b�v�O�ɍs�����Ȃ�.
+        // プレイヤーの移動処理.
         if (player.x < -player.size * 0.45)   
             player.x = -player.size * 0.4;
 
@@ -78,13 +79,13 @@ bool Game_Main(void)
                  player.y = GAME_SCREEN_HEIGHT - player.size * 2.2;
 
         
-        ClearDrawScreen();      // �`��̏���.
+        ClearDrawScreen();      // 画面初期化.
 
         DrawGraph(player.x, player.y, imgPlayer, TRUE);
         DrawFormatString(10, 10, GetColor(255, 255, 255), "X : %0.2f", player.x);
         DrawFormatString(10, 30, GetColor(255, 255, 255), "Y : %0.2f", player.y);
     }
-    //DeleteGraph(imgPlayer);
+    DeleteGraph(imgPlayer);
 
     return true;
 }

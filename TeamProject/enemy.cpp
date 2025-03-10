@@ -34,7 +34,6 @@ void slime::Enemy_Finalize() {
 	DeleteGraph(m_image);
 }
 
-
 //“®‚«‚P
 goes::goes(int x, int y) :m_x(x), m_y(y) {
 	g_image = LoadGraph("../assets/Enemy9.png"); // ‰æ‘œ“Ç‚İ‚İ
