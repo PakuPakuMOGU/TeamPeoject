@@ -3,7 +3,7 @@
 
 //スライム用
 
-slime::slime(int x, int y, int minX, int maxX) :m_x(x), m_y(y),m_minX(minX),m_maxX(maxX){
+slime::slime(float x, float y, float minX, float maxX) :m_x(x), m_y(y),m_minX(minX),m_maxX(maxX){
 	m_image = LoadGraph("../assets/Enemy40.png"); // 画像読み込み
 }
 //動きの計算
@@ -17,11 +17,12 @@ void slime::Enemy_Update() {
 
 //描画
 void slime::Enemy_Draw() {
+	DrawFormatString(10, 10, GetColor(255, 255, 255), "Goes_Draw() called! x: %d, y: %d\n", m_x, m_y);
 	DrawGraph(m_x+40, m_y+40, m_image, TRUE);
 }
 
 //座標を設定
-void slime::SetPosition(int x, int y,int minX, int maxX) {
+void slime::SetPosition(float x, float y, float minX, float maxX) {
 	m_x = x;
 	m_y = y;
 	m_minX = minX;
@@ -51,6 +52,7 @@ void goes::Goes_Update() {
 
 //描画
 void goes::Goes_Draw() {
+	
 	DrawGraph(m_x, m_y, g_image, TRUE);
 }
 
