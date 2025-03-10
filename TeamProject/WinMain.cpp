@@ -10,7 +10,7 @@ const int NUM_SLIMES = 2;  // スライムの数.
 const int ENEMY = 1;
 
 slime slimeArray[NUM_SLIMES] = {
-        slime(0, 0),  // 初期化？文字化けしてて分からない.
+        slime(0, 0),  // スライムの数だけ初期化
         slime(50, 50)
 };
 
