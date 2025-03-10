@@ -2,16 +2,18 @@
 #include"enemy.h"
 #include"system.h"
 
-static const int windowWidth = 640;  // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚µã‚¤ã‚º(DxLibã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚µã‚¤ã‚ºã¨åŒã˜)
+static const int windowWidth = 640;  // ƒEƒBƒ“ƒhƒE‚ÌƒTƒCƒY
 static const int windowHeight = 480;
-static const int colorDepth = 32;    // 32bit ã‚«ãƒ©ãƒ¼ã‚’ä½¿ç”¨ã™ã‚‹
+static const int colorDepth = 32;    // ƒJƒ‰[
 
-const int NUM_SLIMES = 2;  // ã‚¹ãƒ©ã‚¤ãƒ ã®æ•°.
+const int NUM_SLIMES = 2;  // ƒXƒ‰ƒCƒ€‚Ì”
 const int ENEMY = 1;
+int maxX = 100;
+int minX = 0;
 
 slime slimeArray[NUM_SLIMES] = {
-        slime(0, 0),  // ã‚¹ãƒ©ã‚¤ãƒ ã®æ•°ã ã‘åˆæœŸåŒ–
-        slime(50, 50)
+        slime(0, 0,minX,maxX),  // ƒXƒ‰ƒCƒ€‚Ì”‚¾‚¯‰Šú‰»
+        slime(50, 50,minX,maxX)
 };
 
 goes goesArray[ENEMY] = {
@@ -24,7 +26,14 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     ChangeWindowMode(TRUE);
     if (DxLib_Init() == -1) return -1;
 
+
     System_Main();
+
+    slime slimeArray[NUM_SLIMES] = {
+        slime(0, 0,minX,maxX),  // ‰ŠúˆÊ’u‚ðŽw’è‚µ‚ÄƒXƒ‰ƒCƒ€‚ðì¬
+        slime(50, 50,minX,maxX)
+    };
+
 
     DxLib_End();
     return 0;
