@@ -5,9 +5,10 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
    
-   
-    ChangeWindowMode(TRUE); // ウィンドウモードに変更
-    SetGraphMode(500, 400, 32); // 解像度とカラー設定
+  
+
+
+    SetGraphMode(1920, 1080, 32); // 解像度とカラー設定
 
     if (DxLib_Init() == -1)
     {
