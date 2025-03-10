@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="Task.cpp" />
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="System.cpp" />
@@ -28,8 +29,8 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="enemy.h" />
+    <ClInclude Include="task.h" />
   </ItemGroup>
-
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
