@@ -2,18 +2,18 @@
 #include"enemy.h"
 #include"system.h"
 
-static const int windowWidth = 640;  // 繧ｦ繧｣繝ｳ繝峨え縺ｮ繧ｵ繧､繧ｺ(DxLib縺ｮ繝・ヵ繧ｩ繝ｫ繝医し繧､繧ｺ縺ｨ蜷後§)
+static const int windowWidth = 640;  // ウィンドウのサイズ
 static const int windowHeight = 480;
-static const int colorDepth = 32;    // 32bit 繧ｫ繝ｩ繝ｼ繧剃ｽｿ逕ｨ縺吶ｋ
+static const int colorDepth = 32;    // カラー
 
-const int NUM_SLIMES = 2;  // 繧ｹ繝ｩ繧､繝縺ｮ謨ｰ.
+const int NUM_SLIMES = 2;  // スライムの数
 const int ENEMY = 1;
 int maxX = 100;
 int minX = 0;
 
 slime slimeArray[NUM_SLIMES] = {
-        slime(0, 0),  // 蛻晄悄蛹厄ｼ滓枚蟄怜喧縺代＠縺ｦ縺ｦ蛻・°繧峨↑縺・
-        slime(50, 50)
+        slime(0, 0,minX,maxX),  // スライムの数だけ初期化
+        slime(50, 50,minX,maxX)
 };
 
 goes goesArray[ENEMY] = {
