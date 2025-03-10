@@ -20,14 +20,20 @@ struct Map {
     // コンストラクタ
     Map();
 
-    // マップを描画する関数
-    void DrawMap() const;
+   
+ void DrawMap() const;
 
     // グラフィックのロード
     void LoadGraphics();
 
     // グラフィックの解放
     void DeleteGraphics();
+
+   
 };
+
+
+
+
 
 #endif // MAP_H
