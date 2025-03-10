@@ -23,6 +23,11 @@ void slime::SetPosition(int x, int y) {
 	m_y = y;
 }
 
+//アタック
+void slime::Enemy_Attack() {
+
+}
+
 //終了時のメモリ開放
 void slime::Enemy_Finalize() {
 	DeleteGraph(m_image);

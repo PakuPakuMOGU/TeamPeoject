@@ -10,6 +10,7 @@ public:
 	void Enemy_Draw();//描画
 
 	void SetPosition(int x, int y);//ポジション設定
+	void Enemy_Attack();//攻撃判定
 	void Enemy_Finalize();//データ開放
 
 	//動かしたくないもの
