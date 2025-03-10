@@ -1,31 +1,21 @@
 #include<Dxlib.h>
-#include"enemy.h"
-#include"system.h"
 
-static const int windowWidth = 640;  // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚µã‚¤ã‚º(DxLibã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚µã‚¤ã‚ºã¨åŒã˜)
+static const int windowWidth = 640;  // ƒEƒBƒ“ƒhƒE‚ÌƒTƒCƒY(DxLib‚ÌƒfƒtƒHƒ‹ƒgƒTƒCƒY‚Æ“¯‚¶)
 static const int windowHeight = 480;
-static const int colorDepth = 32;    // 32bit ã‚«ãƒ©ãƒ¼ã‚’ä½¿ç”¨ã™ã‚‹
-
-const int NUM_SLIMES = 2;  // ã‚¹ãƒ©ã‚¤ãƒ ã®æ•°.
-const int ENEMY = 1;
-
-slime slimeArray[NUM_SLIMES] = {
-        slime(0, 0),  // åˆæœŸåŒ–ï¼Ÿæ–‡å­—åŒ–ã‘ã—ã¦ã¦åˆ†ã‹ã‚‰ãªã„.
-        slime(50, 50)
-};
-
-goes goesArray[ENEMY] = {
-        goes(30,30)
-};
+static const int colorDepth = 32;    // 32bit ƒJƒ‰[‚ğg—p‚·‚é
 
 int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
-{  
+{
+    SetGraphMode(windowWidth, windowHeight, colorDepth);
     ChangeWindowMode(TRUE);
     if (DxLib_Init() == -1) return -1;
 
-    System_Main();
-
+    int a = 0;
+    while (a == 0) {
+        DrawFormatString(10, 25, GetColor(255, 255, 255), "HelloWorld!!");
+        if (CheckHitKey(KEY_INPUT_A))    a++;
+    }
     DxLib_End();
     return 0;
 }
