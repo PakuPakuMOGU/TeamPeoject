@@ -1,21 +1,18 @@
 #include<Dxlib.h>
+#include "System.h"
+#include "Game.h"
 
-static const int windowWidth = 640;  // ウィンドウのサイズ(DxLibのデフォルトサイズと同じ)
-static const int windowHeight = 480;
-static const int colorDepth = 32;    // 32bit カラーを使用する
+#include <Windows.h>
 
 int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
-{
-    SetGraphMode(windowWidth, windowHeight, colorDepth);
+{  
     ChangeWindowMode(TRUE);
-    if (DxLib_Init() == -1) return -1;
+    SetGraphMode(GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT, 32);
+    if (DxLib_Init() == -1) return false;
 
-    int a = 0;
-    while (a == 0) {
-        DrawFormatString(10, 25, GetColor(255, 255, 255), "HelloWorld!!");
-        if (CheckHitKey(KEY_INPUT_A))    a++;
-    }
+    Game_Main();
+    
     DxLib_End();
     return 0;
 }
