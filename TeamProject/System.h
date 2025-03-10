@@ -1,8 +1,8 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-#define GAME_SCREEN_WIDTH	1280	// ゲーム画面の幅.
-#define GAME_SCREEN_HEIGHT	 720	// ゲーム画面の高さ.
+#define GAME_SCREEN_WIDTH	640	// ゲーム画面の幅.
+#define GAME_SCREEN_HEIGHT	480	// ゲーム画面の高さ.
 
 #include "DxLib.h"
 

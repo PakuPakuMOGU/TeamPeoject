@@ -2,8 +2,6 @@
 #include"enemy.h"
 #include"system.h"
 
-static const int windowWidth = 640;  // ウィンドウのサイズ
-static const int windowHeight = 480;
 static const int colorDepth = 32;    // カラー
 
 const int NUM_SLIMES = 2;  // スライムの数
