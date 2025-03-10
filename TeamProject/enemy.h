@@ -7,6 +7,7 @@ public:
 	
 	slime(float x, float y, float minX, float maxX);//‰Šú‰»
 
+	int InitSlime();
 	void Enemy_Update();//ˆÚ“®
 	void Enemy_Draw();//•`‰æ
 
@@ -18,7 +19,7 @@ public:
 private:
 	int m_image;
 	float m_y, m_x,m_minX,m_maxX;
-	float m_move = 0.01f;//ˆê‰ñ‚ÉˆÚ“®‚·‚é‹——£
+	float m_move = 0.0001f;//ˆê‰ñ‚ÉˆÚ“®‚·‚é‹——£
 };
 
 class goes {

@@ -2,16 +2,17 @@
 #include "DxLib.h"
 #include "enemy.h"
 
-#define CHARASPEED 0.002;
+#define CHARASPEED 0.002
 
-const int NUM_SLIMES = 2;  // スライムの数
+#define NUM_SLIMES 2
+
 const int ENEMY = 1;
 int maxX = 100;
 int minX = 0;
 
 slime slimeArray[NUM_SLIMES] = {
-        slime(0, 0,minX,maxX),  // 初期位置を指定してスライムを作成
-        slime(50, 50,minX,maxX)
+        slime( 0,  0, minX, maxX), // 初期位置を指定してスライムを作成
+        slime(50, 50, minX, maxX)
 };
 
 goes goesArray[ENEMY] = {
@@ -38,8 +39,6 @@ typedef enum Task_GameState
 
 static int imgPlayer;
 
-
-
 /* プレイヤーの画像読み込み */
 int Init()
 {
@@ -65,6 +64,9 @@ bool Game_Main(void)
     player.speedY = 0;
 
     Init();
+    for (int i = 0; i < NUM_SLIMES; i++) {
+        slimeArray[i].InitSlime();      // スライムの初期化.
+    }
     
     while (1) {
         if (CheckHitKey(KEY_INPUT_ESCAPE)) break;   // ESCAPEで終了.
@@ -112,9 +114,11 @@ bool Game_Main(void)
 
         DrawFormatString(10, 10, GetColor(255, 255, 255), "X : %0.2f", player.x);
         DrawFormatString(10, 30, GetColor(255, 255, 255), "Y : %0.2f", player.y);
+
         for (int i = 0; i < NUM_SLIMES; i++) { slimeArray[i].Enemy_Draw(); }
-        for (int i = 0; i < ENEMY; i++) { goesArray[i].Goes_Draw(); }
+        for (int i = 0; i < ENEMY;      i++) { goesArray[i].Goes_Draw(); }
     }
+
     DeleteGraph(imgPlayer);
     for (int i = 0; i < NUM_SLIMES; i++)
     {

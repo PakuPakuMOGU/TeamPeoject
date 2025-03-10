@@ -1,11 +1,18 @@
 #include "DxLib.h"
 #include "enemy.h"
 
-//スライム用
 
+//スライム用
 slime::slime(float x, float y, float minX, float maxX) :m_x(x), m_y(y),m_minX(minX),m_maxX(maxX){
-	m_image = LoadGraph("../assets/Enemy40.png"); // 画像読み込み
+	m_image = -1;
 }
+
+int slime::InitSlime()
+{
+	m_image = LoadGraph("../assets/Enemy40.png"); // 画像読み込み
+	if (m_image == -1)return -1;
+}
+
 //動きの計算
 void slime::Enemy_Update() {
 	m_x += m_move;
@@ -17,7 +24,7 @@ void slime::Enemy_Update() {
 
 //描画
 void slime::Enemy_Draw() {
-	DrawFormatString(10, 10, GetColor(255, 255, 255), "Goes_Draw() called! x: %d, y: %d\n", m_x, m_y);
+	//DrawFormatString(10, 100, GetColor(255, 255, 255), " x: %0.2f,   y: %d\n", m_x, m_y);
 	DrawGraph(m_x+40, m_y+40, m_image, TRUE);
 }
 
