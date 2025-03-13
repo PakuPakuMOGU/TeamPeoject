@@ -38,6 +38,23 @@ private:
 	float g_y, g_x, g_minX, g_maxX, g_minY, g_maxY,g_moveX,g_moveY;
 };
 
+class fly {
+public:
 
+	fly(float x, float y, float minY, float maxY, float move);//初期化
+
+	int InitFly();	//画像の読み込み
+	void Fly_Update();//移動
+	void Fly_Draw();//描画
+
+	void SetPosition(float x, float y, float minY, float maxY, float move);//ポジション設定
+	void Fly_Attack();//攻撃判定
+	void Fly_Finalize();//データ開放
+
+	//動かしたくないもの
+private:
+	int f_image;
+	float f_y, f_x, f_minY, f_maxY, f_move;
+};
 #endif
 

@@ -47,7 +47,7 @@ void slime::Enemy_Finalize() {
 	DeleteGraph(m_image);
 }
 
-//動き１
+//ゴースト
 goes::goes(int x, int y, float minX, float maxX, float minY, float maxY, float moveX, float moveY)
 	: g_x(x), g_y(y), g_minX(minX), g_maxX(maxX), g_minY(minY), g_maxY(maxY), g_moveX(moveX), g_moveY(moveY) {
 	g_image = -1;
@@ -93,4 +93,50 @@ void goes::GoesSetPosition(int x, int y, float minX, float maxX, float minY, flo
 //終了時のメモリ開放
 void goes::Goes_Finalize() {
 	DeleteGraph(g_image);
+}
+
+
+
+//上下に動く
+fly::fly(float x, float y, float minY, float maxY, float move) :f_x(x), f_y(y), f_minY(minY), f_maxY(maxY), f_move(move){
+	f_image = -1;
+   }
+
+int fly::InitFly()
+{
+	f_image = LoadGraph("../assets/Enemy2.png"); // 画像読み込み
+	if (f_image == -1)return -1;
+}
+
+//動きの計算
+void fly::Fly_Update() {
+	f_y += f_move;
+
+	if (f_y >= f_maxY || f_y <= f_minY) {
+		f_move *= -1;
+	}
+}
+
+//描画
+void fly::Fly_Draw() {
+	DrawGraph(f_x, f_y, f_image, TRUE);
+}
+
+//座標を設定
+void fly::SetPosition(float x, float y, float minY, float maxY, float move) {
+	f_x = x;
+	f_y = y;
+	f_minY = minY;
+	f_maxY = maxY;
+	f_move = move;
+}
+
+//アタック
+void fly::Fly_Attack() {
+
+}
+
+//終了時のメモリ開放
+void fly::Fly_Finalize() {
+	DeleteGraph(f_image);
 }

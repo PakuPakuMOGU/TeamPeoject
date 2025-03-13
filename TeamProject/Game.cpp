@@ -6,6 +6,7 @@
 
 #define NUM_SLIMES 2
 #define ENEMY 1
+#define FLY 1
 
 #define GAMESIZE 10     // ゲーム画面のサイズ調整用.
 
@@ -13,9 +14,9 @@ int maxX = 100;
 int minX = 0;
 int minY = 0;
 int maxY = 100;
-float move = 0.0001f;
-float moveX = 0.0001f;
-float moveY = 0.0001f;
+float move = 0.0001f;//slime
+float moveX = 0.0001f;//goes
+float moveY = 0.0001f;//goes
 
 slime slimeArray[NUM_SLIMES] = {
         slime( 0,  0, minX, maxX,move), // 初期位置を指定してスライムを作成
@@ -24,6 +25,10 @@ slime slimeArray[NUM_SLIMES] = {
 
 goes goesArray[ENEMY] = {
         goes(30,30,minX, maxX,minY,maxY,moveX,moveY)
+};
+
+fly flyArray[FLY] = {
+        fly(100, 100, 100, 250, 0.0001f)
 };
 
 struct Player {
@@ -81,6 +86,9 @@ bool Game_Main(void)
     for (int i = 0; i < ENEMY; i++) {
         goesArray[i].InitGoes();      // スライムの初期化.
     }
+    for (int i = 0; i < FLY; i++) {
+        flyArray[i].InitFly();      // スライムの初期化.
+    }
     
     while (1) {
         if (CheckHitKey(KEY_INPUT_ESCAPE)) break;   // ESCAPEで終了.
@@ -122,6 +130,11 @@ bool Game_Main(void)
             goesArray[i].Goes_Update();
         }
 
+        for (int i = 0; i < ENEMY; i++)
+        {
+            flyArray[i].Fly_Update();
+        }
+
         ClearDrawScreen();      // 画面初期化.
 
         if (player.left)    DrawTurnGraph(player.x, player.y, imgPlayer, TRUE);
@@ -130,8 +143,10 @@ bool Game_Main(void)
         DrawFormatString(10, 10, GetColor(255, 255, 255), "X : %0.2f", player.x);
         DrawFormatString(10, 30, GetColor(255, 255, 255), "Y : %0.2f", player.y);
 
+        //モンスターの描画
         for (int i = 0; i < NUM_SLIMES; i++) { slimeArray[i].Enemy_Draw(); }
         for (int i = 0; i < ENEMY;      i++) { goesArray[i].Goes_Draw(); }
+        for (int i = 0; i < FLY; i++) { flyArray[i].Fly_Draw(); }
     }
 
     DeleteGraph(imgPlayer);
@@ -142,6 +157,10 @@ bool Game_Main(void)
     for (int i = 0; i < ENEMY; i++)
     {
         goesArray[i].Goes_Finalize();
+    }
+    for (int i = 0; i < FLY; i++)
+    {
+        flyArray[i].Fly_Finalize();
     }
 
     return true;
