@@ -5,37 +5,37 @@
 class slime {
 public:
 	
-	slime(float x, float y, float minX, float maxX);//初期化
+	slime(float x, float y, float minX, float maxX, float move);//初期化
 
-	int InitSlime();
+	int InitSlime();	//画像の読み込み
 	void Enemy_Update();//移動
 	void Enemy_Draw();//描画
 
-	void SetPosition(float x, float y, float minX, float maxX);//ポジション設定
+	void SetPosition(float x, float y, float minX, float maxX, float move);//ポジション設定
 	void Enemy_Attack();//攻撃判定
 	void Enemy_Finalize();//データ開放
 
 	//動かしたくないもの
 private:
 	int m_image;
-	float m_y, m_x,m_minX,m_maxX;
-	float m_move = 0.0001f;//一回に移動する距離
+	float m_y, m_x,m_minX,m_maxX,m_move;
 };
 
 class goes {
 public:
-	goes(int x, int y);//初期化
+	goes(int x, int y, float minX, float maxX, float minY, float maxY, float moveX, float moveY);//初期化
 
+	int InitGoes();	//画像の読み込み
 	void Goes_Update();//移動
 	void Goes_Draw();//描画
 
-	void GoesSetPosition(int x, int y);//ポジション設定
+	void GoesSetPosition(int x, int y, float minX, float maxX, float minY, float maxY, float moveX, float moveY);//ポジション設定
 	void Goes_Finalize();//データ開放
 
 	//動かしたくないもの
 private:
 	int g_image;
-	int m_y, m_x;
+	float g_y, g_x, g_minX, g_maxX, g_minY, g_maxY,g_moveX,g_moveY;
 };
 
 

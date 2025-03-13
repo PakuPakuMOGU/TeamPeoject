@@ -5,18 +5,23 @@
 #define CHARASPEED 0.002
 
 #define NUM_SLIMES 2
+#define ENEMY 1
 
-const int ENEMY = 1;
 int maxX = 100;
 int minX = 0;
+int minY = 0;
+int maxY = 100;
+float move = 0.0001f;
+float moveX = 0.0001f;
+float moveY = 0.0001f;
 
 slime slimeArray[NUM_SLIMES] = {
-        slime( 0,  0, minX, maxX), // 初期位置を指定してスライムを作成
-        slime(50, 50, minX, maxX)
+        slime( 0,  0, minX, maxX,move), // 初期位置を指定してスライムを作成
+        slime(50, 50, minX, maxX,move)
 };
 
 goes goesArray[ENEMY] = {
-        goes(30,30)
+        goes(30,30,minX, maxX,minY,maxY,moveX,moveY)
 };
 
 struct Player {
@@ -66,6 +71,9 @@ bool Game_Main(void)
     Init();
     for (int i = 0; i < NUM_SLIMES; i++) {
         slimeArray[i].InitSlime();      // スライムの初期化.
+    }
+    for (int i = 0; i < ENEMY; i++) {
+        goesArray[i].InitGoes();      // スライムの初期化.
     }
     
     while (1) {
