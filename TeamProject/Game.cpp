@@ -23,6 +23,7 @@ struct Player {
     float x;    // プレイヤーの座標.
     float y;    // プレイヤーの座標.
     int size;
+    bool left;
 
     bool directionLeft; // プレイヤーの向き.
     float speedX;       // プレイヤーのx軸移動.
@@ -60,6 +61,7 @@ bool Game_Main(void)
     player.x = 0.0f;
     player.y = 0.0f;
     player.size = 40 * 0.7;
+    player.left = false;
     player.speedX = 0;
     player.speedY = 0;
 
@@ -73,12 +75,12 @@ bool Game_Main(void)
 
         /* --- キーボード操作 --- */
         player.speedX *= CHARASPEED;
-        if (CheckHitKey(KEY_INPUT_A))      player.speedX = -CHARASPEED;
-        if (CheckHitKey(KEY_INPUT_D))      player.speedX = CHARASPEED;
+        if (CheckHitKey(KEY_INPUT_A)) { player.speedX = -CHARASPEED; player.left = true; }
+        if (CheckHitKey(KEY_INPUT_D)) { player.speedX =  CHARASPEED; player.left = false; }
 
         player.speedY *= CHARASPEED;
         if (CheckHitKey(KEY_INPUT_W))      player.speedY = -CHARASPEED;
-        if (CheckHitKey(KEY_INPUT_S))      player.speedY = CHARASPEED;
+        if (CheckHitKey(KEY_INPUT_S))      player.speedY =  CHARASPEED;
 
         player.x += player.speedX;
         player.y += player.speedY;
@@ -110,7 +112,8 @@ bool Game_Main(void)
 
         ClearDrawScreen();      // 画面初期化.
 
-        DrawGraph(player.x, player.y, imgPlayer, TRUE);
+        if (player.left)    DrawTurnGraph(player.x, player.y, imgPlayer, TRUE);
+        else                DrawGraph(player.x, player.y, imgPlayer, TRUE);
 
         DrawFormatString(10, 10, GetColor(255, 255, 255), "X : %0.2f", player.x);
         DrawFormatString(10, 30, GetColor(255, 255, 255), "Y : %0.2f", player.y);
