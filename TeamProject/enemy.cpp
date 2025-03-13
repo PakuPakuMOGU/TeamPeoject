@@ -140,3 +140,73 @@ void fly::Fly_Attack() {
 void fly::Fly_Finalize() {
 	DeleteGraph(f_image);
 }
+
+
+//四角く動く
+cow::cow(int x, int y, float minX, float maxX, float minY, float maxY, float moveX, float moveY)
+	: c_x(x), c_y(y), c_minX(minX), c_maxX(maxX), c_minY(minY), c_maxY(maxY), c_moveX(moveX), c_moveY(moveY) {
+	c_image = -1;
+}
+
+int cow::InitCow()
+{
+	c_image = LoadGraph("../assets/Enemy4.png"); // 画像読み込み
+	if (c_image == -1)return -1;
+}
+
+//動きの計算
+void cow::Cow_Update() 
+{
+	switch (moveDirection)
+	{
+	case 0:  // 右へ
+		c_x += c_moveX;
+		if (c_x >= c_maxX) {
+			c_x = c_maxX;  moveDirection = 1;
+		}
+		break;
+	case 1:  // 下へ
+		c_y += c_moveY;
+		if (c_y >= c_maxY) {
+			c_y = c_maxY;  moveDirection = 2; // 次は左へ
+		}
+		break;
+
+	case 2:  // 左へ
+		c_x -= c_moveX;
+		if (c_x <= c_minX) {
+			c_x = c_minX;  moveDirection = 3; // 次は上へ
+		}
+		break;
+
+	case 3:  // 上へ
+		c_y -= c_moveY;
+		if (c_y <= c_minY) {
+			c_y = c_minY;  moveDirection = 0; // 次は右へ
+		}
+		break;
+	}
+}
+
+//描画
+void cow::Cow_Draw() {
+
+	DrawGraph(c_x, c_y, c_image, TRUE);
+}
+
+//座標を設定
+void cow::CowSetPosition(int x, int y, float minX, float maxX, float minY, float maxY, float moveX, float moveY) {
+	c_x = x;
+	c_y = y;
+	c_minX = minX;
+	c_maxX = maxX;
+	c_minY = minY;
+	c_maxY = maxY;
+	c_moveX = moveX;
+	c_moveY = moveY;
+}
+
+//終了時のメモリ開放
+void cow::Cow_Finalize() {
+	DeleteGraph(c_image);
+}

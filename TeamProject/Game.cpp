@@ -7,6 +7,9 @@
 #define NUM_SLIMES 2
 #define ENEMY 1
 #define FLY 1
+#define FLY 1
+#define COW 1
+
 
 #define GAMESIZE 10     // ゲーム画面のサイズ調整用.
 
@@ -29,6 +32,10 @@ goes goesArray[ENEMY] = {
 
 fly flyArray[FLY] = {
         fly(100, 100, 100, 250, 0.0001f)
+};
+
+cow cowArray[COW] = {
+        cow(0,100, 0, 200, 100, 200 ,0.0001f, 0.0001f)
 };
 
 struct Player {
@@ -89,6 +96,9 @@ bool Game_Main(void)
     for (int i = 0; i < FLY; i++) {
         flyArray[i].InitFly();      // スライムの初期化.
     }
+    for (int i = 0; i < COW; i++) {
+        cowArray[i].InitCow();      // スライムの初期化.
+    }
     
     while (1) {
         if (CheckHitKey(KEY_INPUT_ESCAPE)) break;   // ESCAPEで終了.
@@ -135,6 +145,11 @@ bool Game_Main(void)
             flyArray[i].Fly_Update();
         }
 
+        for (int i = 0; i < COW; i++)
+        {
+           cowArray[i].Cow_Update();
+        }
+
         ClearDrawScreen();      // 画面初期化.
 
         if (player.left)    DrawTurnGraph(player.x, player.y, imgPlayer, TRUE);
@@ -147,6 +162,7 @@ bool Game_Main(void)
         for (int i = 0; i < NUM_SLIMES; i++) { slimeArray[i].Enemy_Draw(); }
         for (int i = 0; i < ENEMY;      i++) { goesArray[i].Goes_Draw(); }
         for (int i = 0; i < FLY; i++) { flyArray[i].Fly_Draw(); }
+        for (int i = 0; i < COW; i++) { cowArray[i].Cow_Draw(); }
     }
 
     DeleteGraph(imgPlayer);
@@ -161,6 +177,10 @@ bool Game_Main(void)
     for (int i = 0; i < FLY; i++)
     {
         flyArray[i].Fly_Finalize();
+    }
+    for (int i = 0; i < COW; i++)
+    {
+        cowArray[i].Cow_Finalize();
     }
 
     return true;

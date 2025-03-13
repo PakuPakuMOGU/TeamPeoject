@@ -56,5 +56,23 @@ private:
 	int f_image;
 	float f_y, f_x, f_minY, f_maxY, f_move;
 };
+
+class cow {
+public:
+	cow(int x, int y, float minX, float maxX, float minY, float maxY, float moveX, float moveY);//初期化
+
+	int moveDirection;//スイッチ
+	int InitCow();	//画像の読み込み
+	void Cow_Update();//移動
+	void Cow_Draw();//描画
+
+	void CowSetPosition(int x, int y, float minX, float maxX, float minY, float maxY, float moveX, float moveY);//ポジション設定
+	void Cow_Finalize();//データ開放
+
+	//動かしたくないもの
+private:
+	int c_image;
+	float c_y, c_x, c_minX, c_maxX, c_minY, c_maxY, c_moveX, c_moveY;
+};
 #endif
 
