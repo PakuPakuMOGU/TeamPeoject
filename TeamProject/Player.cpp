@@ -31,14 +31,24 @@ void Player::Player_Attack()
 
 }
 
-void Player::AddHP(int hp)
+void Player::AddDelHP(int hp)
 {
 	player_hp += hp;
 }
 
-void Player::DelHP(int hp)
+void Player::AddDelMAXHP(int hp)
 {
-	player_hp -= hp;
+	player_maxhp += hp;
+}
+
+void Player::AddDelATK(int atk)
+{
+	player_atk += atk;
+}
+
+void Player::AddDelDEF(int def)
+{
+	player_def += def;
 }
 
 void Player::PlayerGameIn()

@@ -58,7 +58,7 @@ bool Game_Main(void)
         if (CheckHitKey(KEY_INPUT_W))   speedY = -CHARASPEED;
         if (CheckHitKey(KEY_INPUT_S))   speedY =  CHARASPEED;
 
-        if (speedX == speedY)
+        if (speedX == speedY || speedX == -speedY)
         {
             speedX = speedX * 0.707;      // 斜め移動のときに速度を変えない.
             speedY = speedY * 0.707;

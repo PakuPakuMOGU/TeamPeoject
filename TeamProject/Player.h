@@ -15,8 +15,10 @@ public:
 	void Player_Attack();				// 攻撃判定.
 	void Player_Finalize();				// データ開放.
 
-	void AddHP(int hp);
-	void DelHP(int hp);
+	void AddDelHP(int hp);
+	void AddDelMAXHP(int hp);
+	void AddDelATK(int atk);
+	void AddDelDEF(int def);
 
 	float ReX(void);
 	float ReY(void);
@@ -34,6 +36,9 @@ private:
 	float speed_y = 0.0f;
 
 	int player_hp = 10;
+	int player_maxhp = 10;
+	int player_atk = 5;
+	int player_def = 5;
 	int cost = 0;
 	int maxcost = 15;
 };
