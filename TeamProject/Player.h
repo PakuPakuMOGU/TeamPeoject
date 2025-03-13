@@ -26,12 +26,11 @@ public:
 
 	bool left = false;
 
-	//動かしたくないもの
 private:
 	int player_image;
 	float playerX = 0.0f, playerY = 0.0f;
-	float sizeX;   // プレイヤーの当たり判定サイズX.
-	float sizeY;   // プレイヤーの当たり判定サイズY.
+	float sizeX = 0.0f;   // プレイヤーの当たり判定サイズX.
+	float sizeY = 0.0f;   // プレイヤーの当たり判定サイズY.
 	float speed_x = 0.0f;
 	float speed_y = 0.0f;
 

@@ -78,10 +78,12 @@ float Player::ReX(void)
 {
 	return playerX;
 }
+
 float Player::ReY(void)
 {
 	return playerY;
 }
+
 int Player::ReHP(void)
 {
 	return player_hp;
