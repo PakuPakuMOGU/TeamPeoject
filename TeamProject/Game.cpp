@@ -33,8 +33,12 @@ goes goesArray[ENEMY] = {
 // タスク処理.
 typedef enum Task_GameState
 {
-    Task_GameState_InGame,				// ゲーム開始.
-    Task_GameState_EndGame,				// ゲーム終了.
+    Task_GameState_InGame,		// ゲーム開始.
+    Task_GameState_NowGame,		// ゲーム中.
+    Task_GameState_Attack,		// 攻撃する.
+    Task_GameState_Defense,		// 攻撃を受ける.
+    Task_GameState_GetItem,		// アイテムの発見.
+    Task_GameState_EndGame,		// ゲーム終了.
 };
 
 // メイン処理.

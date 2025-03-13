@@ -34,6 +34,7 @@ private:
 	float speed_x = 0.0f;
 	float speed_y = 0.0f;
 
+	// プレイヤーのステータス.
 	int player_hp = 10;
 	int player_maxhp = 10;
 	int player_atk = 5;
