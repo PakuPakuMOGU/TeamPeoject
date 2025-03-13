@@ -7,6 +7,9 @@
 #define NUM_SLIMES 2
 #define ENEMY 1
 
+#define GAMESIZE 10     // ゲーム画面のサイズ調整用.
+
+const int ENEMY = 1;
 int maxX = 100;
 int minX = 0;
 int minY = 0;
@@ -27,9 +30,11 @@ goes goesArray[ENEMY] = {
 struct Player {
     float x;    // プレイヤーの座標.
     float y;    // プレイヤーの座標.
-    int size;
+    float imagesize;
+    float sizeX;
+    float sizeY;
+    bool left;
 
-    bool directionLeft; // プレイヤーの向き.
     float speedX;       // プレイヤーのx軸移動.
     float speedY;       // プレイヤーのy軸移動.
 };
@@ -40,7 +45,7 @@ typedef enum Task_GameState
 {
     Task_GameState_InGame,				// ゲーム開始.
     Task_GameState_EndGame,				// ゲーム終了.
-}Task_GameState;
+};
 
 static int imgPlayer;
 
@@ -64,7 +69,9 @@ bool Game_Main(void)
 {
     player.x = 0.0f;
     player.y = 0.0f;
-    player.size = 40 * 0.7;
+    player.sizeX = 46.0f;
+    player.sizeY = 51.0f;
+    player.left = false;
     player.speedX = 0;
     player.speedY = 0;
 
@@ -81,29 +88,29 @@ bool Game_Main(void)
 
         /* --- キーボード操作 --- */
         player.speedX *= CHARASPEED;
-        if (CheckHitKey(KEY_INPUT_A))      player.speedX = -CHARASPEED;
-        if (CheckHitKey(KEY_INPUT_D))      player.speedX = CHARASPEED;
+        if (CheckHitKey(KEY_INPUT_A)) { player.speedX = -CHARASPEED; player.left = true; }
+        if (CheckHitKey(KEY_INPUT_D)) { player.speedX =  CHARASPEED; player.left = false; }
 
         player.speedY *= CHARASPEED;
-        if (CheckHitKey(KEY_INPUT_W))      player.speedY = -CHARASPEED;
-        if (CheckHitKey(KEY_INPUT_S))      player.speedY = CHARASPEED;
+        if (CheckHitKey(KEY_INPUT_W))   player.speedY = -CHARASPEED;
+        if (CheckHitKey(KEY_INPUT_S))   player.speedY =  CHARASPEED;
 
         player.x += player.speedX;
         player.y += player.speedY;
 
 
         // プレイヤーの移動処理.
-        if (player.x < -player.size * 0.45)
-            player.x = -player.size * 0.4;
+        if (player.x < -GAMESIZE)
+            player.x = -GAMESIZE;
 
-        else if (player.x > GAME_SCREEN_WIDTH - player.size * 2)
-            player.x = GAME_SCREEN_WIDTH - player.size * 2;
+        else if (player.x > GAME_SCREEN_WIDTH - player.sizeX - GAMESIZE)
+            player.x = GAME_SCREEN_WIDTH - player.sizeX - GAMESIZE;
 
-        if (player.y < 0 - player.size * 0.45)
-            player.y = 0 - player.size * 0.45;
+        if (player.y < -GAMESIZE)
+            player.y = -GAMESIZE;
 
-        else if (player.y > GAME_SCREEN_HEIGHT - player.size * 2.2)
-            player.y = GAME_SCREEN_HEIGHT - player.size * 2.2;
+        else if (player.y > GAME_SCREEN_HEIGHT - player.sizeY - GAMESIZE)
+            player.y = GAME_SCREEN_HEIGHT - player.sizeY - GAMESIZE;
 
         //モンスターの移動
         for (int i = 0; i < NUM_SLIMES; i++)
@@ -118,7 +125,8 @@ bool Game_Main(void)
 
         ClearDrawScreen();      // 画面初期化.
 
-        DrawGraph(player.x, player.y, imgPlayer, TRUE);
+        if (player.left)    DrawTurnGraph(player.x, player.y, imgPlayer, TRUE);
+        else                DrawGraph(player.x, player.y, imgPlayer, TRUE);
 
         DrawFormatString(10, 10, GetColor(255, 255, 255), "X : %0.2f", player.x);
         DrawFormatString(10, 30, GetColor(255, 255, 255), "Y : %0.2f", player.y);
