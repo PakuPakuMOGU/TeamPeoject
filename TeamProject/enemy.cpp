@@ -210,3 +210,36 @@ void cow::CowSetPosition(int x, int y, float minX, float maxX, float minY, float
 void cow::Cow_Finalize() {
 	DeleteGraph(c_image);
 }
+
+//戦車（動かない）
+tank::tank(float x, float y) :t_x(x),t_y(y){
+	t_image = -1;
+}
+
+int tank::InitTank()
+{
+	t_image = LoadGraph("../assets/Enemy31.png"); // 画像読み込み
+	if (t_image == -1)return -1;
+}
+
+//描画
+void tank::Tank_Draw() {
+	//DrawFormatString(10, 100, GetColor(255, 255, 255), " x: %0.2f,   y: %d\n", m_x, m_y);
+	DrawGraph(t_x, t_y, t_image, TRUE);
+}
+
+//座標を設定
+void tank::TankSetPosition(float x, float y) {
+	t_x = x;
+	t_y = y;
+}
+
+//アタック
+void tank::Tank_Attack() {
+
+}
+
+//終了時のメモリ開放
+void tank::Tank_Finalize() {
+	DeleteGraph(t_image);
+}

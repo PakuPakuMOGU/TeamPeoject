@@ -6,9 +6,6 @@
 
 #define NUM_SLIMES 2
 #define ENEMY 1
-#define FLY 1
-#define FLY 1
-#define COW 1
 
 
 #define GAMESIZE 10     // ゲーム画面のサイズ調整用.
@@ -30,12 +27,16 @@ goes goesArray[ENEMY] = {
         goes(30,30,minX, maxX,minY,maxY,moveX,moveY)
 };
 
-fly flyArray[FLY] = {
+fly flyArray[ENEMY] = {
         fly(100, 100, 100, 250, 0.0001f)
 };
 
-cow cowArray[COW] = {
+cow cowArray[ENEMY] = {
         cow(0,100, 0, 200, 100, 200 ,0.0001f, 0.0001f)
+};
+
+tank tankArray[ENEMY] = {
+    tank(55,55)
 };
 
 struct Player {
@@ -91,13 +92,16 @@ bool Game_Main(void)
         slimeArray[i].InitSlime();      // スライムの初期化.
     }
     for (int i = 0; i < ENEMY; i++) {
-        goesArray[i].InitGoes();      // スライムの初期化.
+        goesArray[i].InitGoes();      // 初期化.
     }
-    for (int i = 0; i < FLY; i++) {
-        flyArray[i].InitFly();      // スライムの初期化.
+    for (int i = 0; i < ENEMY; i++) {
+        flyArray[i].InitFly();      // 初期化.
     }
-    for (int i = 0; i < COW; i++) {
-        cowArray[i].InitCow();      // スライムの初期化.
+    for (int i = 0; i < ENEMY; i++) {
+        cowArray[i].InitCow();      // 初期化.
+    }
+    for (int i = 0; i < ENEMY; i++) {
+       tankArray[i].InitTank();      // 初期化.
     }
     
     while (1) {
@@ -145,7 +149,7 @@ bool Game_Main(void)
             flyArray[i].Fly_Update();
         }
 
-        for (int i = 0; i < COW; i++)
+        for (int i = 0; i < ENEMY; i++)
         {
            cowArray[i].Cow_Update();
         }
@@ -161,8 +165,9 @@ bool Game_Main(void)
         //モンスターの描画
         for (int i = 0; i < NUM_SLIMES; i++) { slimeArray[i].Enemy_Draw(); }
         for (int i = 0; i < ENEMY;      i++) { goesArray[i].Goes_Draw(); }
-        for (int i = 0; i < FLY; i++) { flyArray[i].Fly_Draw(); }
-        for (int i = 0; i < COW; i++) { cowArray[i].Cow_Draw(); }
+        for (int i = 0; i < ENEMY; i++) { flyArray[i].Fly_Draw(); }
+        for (int i = 0; i < ENEMY; i++) { cowArray[i].Cow_Draw(); }
+        for (int i = 0; i < ENEMY; i++) { tankArray[i].Tank_Draw(); }
     }
 
     DeleteGraph(imgPlayer);
@@ -174,13 +179,17 @@ bool Game_Main(void)
     {
         goesArray[i].Goes_Finalize();
     }
-    for (int i = 0; i < FLY; i++)
+    for (int i = 0; i < ENEMY; i++)
     {
         flyArray[i].Fly_Finalize();
     }
-    for (int i = 0; i < COW; i++)
+    for (int i = 0; i < ENEMY; i++)
     {
         cowArray[i].Cow_Finalize();
+    }
+    for (int i = 0; i < ENEMY; i++)
+    {
+        tankArray[i].Tank_Finalize();
     }
 
     return true;

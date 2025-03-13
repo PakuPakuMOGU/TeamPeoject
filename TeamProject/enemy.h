@@ -74,5 +74,22 @@ private:
 	int c_image;
 	float c_y, c_x, c_minX, c_maxX, c_minY, c_maxY, c_moveX, c_moveY;
 };
+
+class tank{
+public:
+	tank(float x, float y);//‰Šú‰»
+
+	int InitTank();
+	void Tank_Draw();
+	void TankSetPosition(float x, float y);
+
+	void Tank_Attack();
+	void Tank_Finalize();
+
+	//“®‚©‚µ‚½‚­‚È‚¢‚à‚Ì
+private:
+	int t_image;
+	float t_x, t_y;
+};
 #endif
 
