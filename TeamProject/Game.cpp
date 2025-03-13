@@ -9,7 +9,6 @@
 
 #define GAMESIZE 10     // ゲーム画面のサイズ調整用.
 
-const int ENEMY = 1;
 int maxX = 100;
 int minX = 0;
 int minY = 0;
