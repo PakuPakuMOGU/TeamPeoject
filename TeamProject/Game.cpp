@@ -18,24 +18,27 @@ float moveX = 0.0001f;
 float moveY = 0.0001f;
 
 slime slimeArray[NUM_SLIMES] = {
-        slime( 0,  0, minX, maxX,move), // 初期位置を指定してスライムを作成
-        slime(50, 50, minX, maxX,move)
+        slime( 0,  0, minX, maxX, move), // 初期位置を指定してスライムを作成
+        slime(50, 50, minX, maxX, move)
 };
 
 goes goesArray[ENEMY] = {
-        goes(30,30,minX, maxX,minY,maxY,moveX,moveY)
+        goes( 30, 30, minX, maxX, minY, maxY, moveX, moveY)
 };
 
 struct Player {
-    float x;    // プレイヤーの座標.
-    float y;    // プレイヤーの座標.
-    float imagesize;
-    float sizeX;
-    float sizeY;
-    bool left;
+    float x = 0;        // プレイヤーの座標X.
+    float y = 0;        // プレイヤーの座標Y.
+    float sizeX = 0;    // プレイヤーの当たり判定サイズX.
+    float sizeY = 0;    // プレイヤーの当たり判定サイズY.
+    float speedX = 0;   // プレイヤーのx軸移動.
+    float speedY = 0;   // プレイヤーのy軸移動.
 
-    float speedX;       // プレイヤーのx軸移動.
-    float speedY;       // プレイヤーのy軸移動.
+    bool left = false;
+
+    int hp = 0;         // プレイヤーのHP.
+    int cost = 0;   // プレイヤーの使用コスト.
+    int maxcost = 0;    // プレイヤーの最大コスト.
 };
 
 Player player;
@@ -53,26 +56,35 @@ int Init()
 {
     imgPlayer = LoadGraph("../assets/Player.png");      
     if (imgPlayer == -1) return false;
+
+    player.x = 0.0f;        // プレイヤーの座標X.
+    player.y = 0.0f;        // プレイヤーの座標Y.
+    player.sizeX = 45.0f;   // プレイヤーの当たり判定サイズX.
+    player.sizeY = 50.0f;   // プレイヤーの当たり判定サイズY.
+    player.speedX = 0.0f;   // プレイヤーのx軸移動.
+    player.speedY = 0.0f;   // プレイヤーのy軸移動.
+
+    player.left = false;    // 左を向いているかどうか.
+
+    player.hp = 10;
+    player.cost = 0;
+    player.maxcost = 15;
+
+    return true;
 }
 
-int ReX(void)
+float ReX(void)
 {
     return player.x;
 }
-int ReY(void)
+float ReY(void)
 {
     return player.y;
 }
 
 bool Game_Main(void)
 {
-    player.x = 0.0f;
-    player.y = 0.0f;
-    player.sizeX = 46.0f;
-    player.sizeY = 51.0f;
-    player.left = false;
-    player.speedX = 0;
-    player.speedY = 0;
+
 
     Init();
     for (int i = 0; i < NUM_SLIMES; i++) {
@@ -87,29 +99,34 @@ bool Game_Main(void)
 
         /* --- キーボード操作 --- */
         player.speedX *= CHARASPEED;
-        if (CheckHitKey(KEY_INPUT_A)) { player.speedX = -CHARASPEED; player.left = true; }
-        if (CheckHitKey(KEY_INPUT_D)) { player.speedX =  CHARASPEED; player.left = false; }
+        if (CheckHitKey(KEY_INPUT_A)) { player.speedX = -CHARASPEED;  player.left = true; }
+        if (CheckHitKey(KEY_INPUT_D)) { player.speedX =  CHARASPEED;  player.left = false; }
 
         player.speedY *= CHARASPEED;
         if (CheckHitKey(KEY_INPUT_W))   player.speedY = -CHARASPEED;
         if (CheckHitKey(KEY_INPUT_S))   player.speedY =  CHARASPEED;
 
+        if (player.speedX == player.speedX)
+        {
+            player.speedX = player.speedX * 0.707;      // 斜め移動のときに速度を変えない.
+            player.speedY = player.speedY * 0.707;
+        }
+
         player.x += player.speedX;
         player.y += player.speedY;
-
 
         // プレイヤーの移動処理.
         if (player.x < -GAMESIZE)
             player.x = -GAMESIZE;
 
         else if (player.x > GAME_SCREEN_WIDTH - player.sizeX - GAMESIZE)
-            player.x = GAME_SCREEN_WIDTH - player.sizeX - GAMESIZE;
+                 player.x = GAME_SCREEN_WIDTH - player.sizeX - GAMESIZE;
 
         if (player.y < -GAMESIZE)
             player.y = -GAMESIZE;
 
         else if (player.y > GAME_SCREEN_HEIGHT - player.sizeY - GAMESIZE)
-            player.y = GAME_SCREEN_HEIGHT - player.sizeY - GAMESIZE;
+                 player.y = GAME_SCREEN_HEIGHT - player.sizeY - GAMESIZE;
 
         //モンスターの移動
         for (int i = 0; i < NUM_SLIMES; i++)
@@ -124,8 +141,14 @@ bool Game_Main(void)
 
         ClearDrawScreen();      // 画面初期化.
 
+        if (player.hp <= 0)
+        {
+            player.hp = 0;
+            break;
+        }
+
         if (player.left)    DrawTurnGraph(player.x, player.y, imgPlayer, TRUE);
-        else                DrawGraph(player.x, player.y, imgPlayer, TRUE);
+        else                DrawGraph(    player.x, player.y, imgPlayer, TRUE);
 
         DrawFormatString(10, 10, GetColor(255, 255, 255), "X : %0.2f", player.x);
         DrawFormatString(10, 30, GetColor(255, 255, 255), "Y : %0.2f", player.y);
