@@ -5,8 +5,8 @@
 #include "DxLib.h"
 
 struct Map {
-    static const int mapWidth = 10;    // マップの横のサイズ
-    static const int mapHeight = 8;    // マップの縦のサイズ
+    static const int mapWidth = 100;    // マップの横のサイズ
+    static const int mapHeight = 100;    // マップの縦のサイズ
     static const int MapChipsize = 48; // マップチップのサイズ（仮置き）
 
     // マップデータ（0: 床, 1: 壁, 2: 壁, 3: ドアなど）
