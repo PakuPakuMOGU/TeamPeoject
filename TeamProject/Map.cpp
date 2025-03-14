@@ -9,8 +9,8 @@ Map::Map() {
         { 1, 1, 0, 0, 0, 0, 0, 0, 1, 1 },
         { 1, 1, 0, 0, 0, 0, 0, 0, 1, 1 },
         { 1, 1, 0, 0, 0, 0, 0, 0, 1, 1 },
-        { 1, 1, 0, 0, 0, 0, 0, 0, 1, 1 },
-        { 1, 1, 0, 0, 0, 0, 0, 0, 1, 1 },
+        { 1, 0, 0, 0, 0, 0, 0, 0, 1, 1 },
+        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
     };
 
     // mapDataにコピー
@@ -23,9 +23,9 @@ Map::Map() {
 
 void Map::LoadGraphics() {
     // グラフィックの読み込み
-    imgPlayer = LoadGraph("../assets/player.png");
-    imgFloor = LoadGraph("../assets/floor.png");
-    imgWall = LoadGraph("../assets/wall.png");
+    imgPlayer = LoadGraph("../assets/robo_x11.png");
+    imgFloor = LoadGraph("../assets/bg_tile.png"); 
+    imgWall = LoadGraph("../assets/block_2x2.png");
 }
 
 void Map::DeleteGraphics() {
